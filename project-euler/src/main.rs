@@ -4,6 +4,9 @@ fn main() {
 
     let answer_2 = euler_2();
     println!("{}", answer_2);
+
+    let answer_3 = euler_3();
+    println!("{}", answer_3);
 }
 
 // If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
@@ -39,4 +42,33 @@ fn euler_2() -> i32 {
 
     let answer: i32 = v.into_iter().filter(|x| x % 2 == 0).sum();
     answer
+}
+
+
+// The prime factors of 13195 are 5, 7, 13 and 29.
+// What is the largest prime factor of the number 600851475143 ?
+// Answer 6857
+fn euler_3() -> i64 {
+
+    let mut largest_prime = 1;
+    let upper: i64 = 600851475143 / 2;
+
+    for i in 2..upper {
+        let mut is_prime = true;
+
+        for j in 2..i {
+            if i % j == 0 {
+                is_prime = false;
+            }
+        }
+
+        if is_prime {
+
+            if 600851475143 % i == 0 {
+                largest_prime = i;
+            }
+        }
+    }
+
+    largest_prime
 }
