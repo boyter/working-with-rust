@@ -7,6 +7,9 @@ fn main() {
 
     let answer_3 = euler_3();
     println!("{}", answer_3);
+
+    let answer_6 = euler_6();
+    println!("{}", answer_6);
 }
 
 // If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
@@ -74,6 +77,37 @@ fn euler_3() -> i64 {
     0
 }
 
+// By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+// What is the 10 001st prime number?
+// Answer 104743
+fn euler_6() -> i32 {
+    
+    let mut count = 0;
+    let mut i = 2;
+
+    loop {
+        let mut is_prime = true;
+
+        for j in 2..i {
+            if i % j == 0 {
+                is_prime = false;
+            }
+        }
+
+        if is_prime {
+            count += 1;
+        }
+
+        if count == 10001 {
+            break;
+        }
+
+        i += 1;
+    }
+
+    i
+}
+
 
 #[cfg(test)]
 mod main {
@@ -92,6 +126,11 @@ mod main {
     #[test]
     fn test_euler_3() {
          assert_eq!(6857, euler_3());
+    }
+
+    #[test]
+    fn test_euler_6() {
+         assert_eq!(104743, euler_6());
     }
 }
 
