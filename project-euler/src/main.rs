@@ -10,6 +10,9 @@ fn main() {
 
     let answer_7 = euler_7();
     println!("{}", answer_7);
+
+    let answer_35 = euler_35();
+    println!("{}", answer_35);
 }
 
 // If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
@@ -108,6 +111,70 @@ fn euler_7() -> i32 {
     i
 }
 
+// The number, 197, is called a circular prime because all rotations of the digits: 197, 971, and 719, are themselves prime.
+// There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.
+// How many circular primes are there below one million?
+fn euler_35() -> i32 {
+    let mut count = 0;
+
+    for i in 1..1000001 {
+        if filter_circular(i) {
+            if is_prime(i) {
+                let mut rot = rotate_number(i);
+                let mut is_circular = true;
+
+                for _ in 1..i.to_string().len() {
+                    if !is_prime(rot) {
+                        is_circular = false;
+                    }
+                    rot = rotate_number(rot);
+                }
+
+                if is_circular {
+                    count += 1;
+                }
+            }
+        }
+    }
+
+    count
+}
+
+fn filter_circular(x: i32) -> bool {
+    if x == 2 {
+        return true;
+    }
+
+    let string = x.to_string();
+
+    if string.contains("2") || string.contains("4") || string.contains("5") || string.contains("6") || string.contains("8") || string.contains("0") {
+        return false;
+    }
+    true
+}
+
+fn is_prime(x: i32) -> bool {
+    for i in 2..x {
+        if x % i == 0 {
+            return false
+        }
+    }
+
+    true
+}
+
+fn rotate_number(x: i32) -> i32 {
+    let string = x.to_string();
+
+    // Warning: Not unicode aware
+    let start = &string[1..string.len()];
+    let end = &string[0..1];
+    let toreturn = format!("{}{}", start, end);
+
+    let ret: i32 = toreturn.parse().unwrap();
+    ret
+}
+
 
 #[cfg(test)]
 mod main {
@@ -130,7 +197,12 @@ mod main {
 
     #[test]
     fn test_euler_7() {
-         assert_eq!(104743, euler_6());
+         assert_eq!(104743, euler_7());
+    }
+
+    #[test]
+    fn test_euler_35() {
+         assert_eq!(55, euler_35());
     }
 }
 
