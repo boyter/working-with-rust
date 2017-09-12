@@ -48,27 +48,51 @@ fn euler_2() -> i32 {
 // The prime factors of 13195 are 5, 7, 13 and 29.
 // What is the largest prime factor of the number 600851475143 ?
 // Answer 6857
+// NB this is not fast enough to check the real key space should look into profiling
 fn euler_3() -> i64 {
+    let upper: i64 = 600851475143 / 10000;
 
-    let mut largest_prime = 1;
-    let upper: i64 = 600851475143 / 2;
+    for i in (2..upper).rev() {
 
-    for i in 2..upper {
-        let mut is_prime = true;
+        if 600851475143 % i == 0 {
+            let mut is_prime = true;
 
-        for j in 2..i {
-            if i % j == 0 {
-                is_prime = false;
+            for j in 2..i {
+                if i % j == 0 {
+                    is_prime = false;
+                }
             }
-        }
 
-        if is_prime {
-
-            if 600851475143 % i == 0 {
-                largest_prime = i;
+            if is_prime {
+                if 600851475143 % i == 0 {
+                    return i
+                }
             }
         }
     }
 
-    largest_prime
+    0
 }
+
+
+#[cfg(test)]
+mod main {
+    use super::*;
+
+    #[test]
+    fn test_euler_1() {
+         assert_eq!(233168, euler_1());
+    }
+
+    #[test]
+    fn test_euler_2() {
+         assert_eq!(4613732, euler_2());
+    }
+
+    #[test]
+    fn test_euler_3() {
+         assert_eq!(6857, euler_3());
+    }
+}
+
+
