@@ -118,21 +118,20 @@ fn euler_35() -> i32 {
     let mut count = 0;
 
     for i in 1..1000001 {
-        if filter_circular(i) {
-            if is_prime(i) {
-                let mut rot = rotate_number(i);
-                let mut is_circular = true;
+        if is_prime(i, true) {
+            let mut rot = rotate_number(i);
+            let mut is_circular = true;
 
-                for _ in 1..i.to_string().len() {
-                    if !is_prime(rot) {
-                        is_circular = false;
-                    }
-                    rot = rotate_number(rot);
+            for _ in 1..i.to_string().len() {
+                if !is_prime(rot, false) {
+                    is_circular = false;
+                    break;
                 }
+                rot = rotate_number(rot);
+            }
 
-                if is_circular {
-                    count += 1;
-                }
+            if is_circular {
+                count += 1;
             }
         }
     }
@@ -140,21 +139,22 @@ fn euler_35() -> i32 {
     count
 }
 
-fn filter_circular(x: i32) -> bool {
+fn is_prime(x: i32, check: bool) -> bool {
     if x == 2 {
         return true;
     }
 
-    let string = x.to_string();
+    if check {
+        let string = x.to_string();
 
-    if string.contains("2") || string.contains("4") || string.contains("5") || string.contains("6") || string.contains("8") || string.contains("0") {
-        return false;
+        if string.contains("2") || string.contains("4") || string.contains("5") || string.contains("6") || string.contains("8") || string.contains("0") {
+            return false;
+        }
     }
-    true
-}
 
-fn is_prime(x: i32) -> bool {
-    for i in 2..x {
+    let target = x / 2;
+
+    for i in 2..target {
         if x % i == 0 {
             return false
         }
