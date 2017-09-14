@@ -3,4 +3,9 @@ name = "project-euler"
 version = "0.1.0"
 authors = ["Ben Boyter <ben@boyter.org>"]
 
+[[bin]]
+bench = false
+path = "src/main.rs"
+name = "pe"
+
 [dependencies]
