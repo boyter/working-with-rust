@@ -1,9 +1,8 @@
 // The prime factors of 13195 are 5, 7, 13 and 29.
 // What is the largest prime factor of the number 600851475143 ?
 // Answer 6857
-// NB this is not fast enough to check the real key space should look into profiling
 pub fn euler_3() -> i64 {
-    let upper: i64 = 600851475143 / 10000;
+    let upper: i64 = (600851475143_f64.sqrt()) as i64;
 
     for i in (2..upper).rev() {
 
@@ -11,9 +10,7 @@ pub fn euler_3() -> i64 {
             let is_prime = is_prime(i);
 
             if is_prime {
-                if 600851475143 % i == 0 {
-                    return i
-                }
+                return i;
             }
         }
     }
