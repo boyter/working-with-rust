@@ -2,6 +2,7 @@
 // What is the largest prime factor of the number 600851475143 ?
 // Answer 6857
 pub fn euler_3() -> i64 {
+    // NB the below is a total hack but should work for odd numbers
     let upper: i64 = (600851475143_f64.sqrt()) as i64;
 
     for i in (2..upper).rev() {
