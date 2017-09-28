@@ -3,12 +3,38 @@ use std::collections::HashMap;
 
 fn main() {
 
-    let my_string = String::from("hello world world");
-    let con1 = concordance(&my_string);
+    let str1 = String::from("Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety.");
+    let str2 = String::from("Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety. Featuring zero-cost abstractions move semantics guaranteed memory safety threads without data races trait-based generics pattern matching type inference minimal runtime efficient C bindings");
+    let con1 = concordance(&str1);
+    let con2 = concordance(&str2);
 
-    println!("{:?}", con1);
-    println!("Hello, world!");
+    let rel = relation(&con1, &con2);
 
+    println!("{}", rel);
+}
+
+fn magnitude(concordance: &HashMap<&str, u32>) -> f64 {
+    let mut total = 0.0;
+
+    for (_, value) in concordance {
+        total += (*value as f64).powf(2.0);
+    }
+    
+    (total as f64).sqrt()
+}
+
+fn relation(concordance1: &HashMap<&str, u32>, concordance2: &HashMap<&str, u32>) -> f64 {
+    let mut topvalue = 0;
+
+    for (key, value) in concordance1 {
+        let found = concordance2.get(key);
+
+        if found.is_some() {
+            topvalue += value * found.unwrap();
+        }
+    }
+
+    return (topvalue as f64) / (magnitude(concordance1) * magnitude(concordance2))
 }
 
 fn concordance(document: &str) -> HashMap<&str, u32> {
@@ -20,31 +46,3 @@ fn concordance(document: &str) -> HashMap<&str, u32> {
 
     concordance
 }
-
-/*
-class VectorCompare:
-    def magnitude(self, concordance):
-        total = 0
-        for word, count in concordance.iteritems():
-            total += count ** 2
-        return math.sqrt(total)
-
-    def relation(self, concordance1, concordance2):
-        topvalue = 0
-        for word, count in concordance1.iteritems():
-            if word in concordance2:
-                topvalue += count * concordance2[word]
-        if (self.magnitude(concordance1) * self.magnitude(concordance2)) != 0:
-            return topvalue / (self.magnitude(concordance1) * self.magnitude(concordance2))
-        else:
-            return 0
-
-    def concordance(self, document):
-        con = {}
-        for word in document.split(' '):
-            if word in con:
-                con[word] = con[word] + 1
-            else:
-                con[word] = 1
-        return con
-        */
