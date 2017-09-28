@@ -1,2 +1,7 @@
 project-euler/Cargo.lock
 project-euler/target/*
+vector-space/Cargo.lock
+vector-space/target/*
+borrowing/Cargo.lock
+borrowing/target/*
+
