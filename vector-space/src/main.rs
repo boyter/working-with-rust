@@ -3,17 +3,22 @@ use std::collections::HashMap;
 
 fn main() {
 
-    let my_string = String::from("hello world");
-    concordance(&my_string);
+    let my_string = String::from("hello world world");
+    let con1 = concordance(&my_string);
+
+    println!("{:?}", con1);
     println!("Hello, world!");
 
 }
 
-fn concordance(document: &str) {
+fn concordance(document: &str) -> HashMap<&str, u32> {
     let mut concordance = HashMap::new();
-    for s in document.split(" ") {
-        concordance.insert(s, 1);
+    for word in document.split_whitespace() {
+        let count = concordance.entry(word).or_insert(0);
+        *count += 1;
     }
+
+    concordance
 }
 
 /*
