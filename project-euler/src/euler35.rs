@@ -110,6 +110,12 @@ mod main {
     }
 
     #[test]
+    fn test_is_excluded() {
+        assert_eq!(true, is_excluded(22));
+        assert_eq!(false, is_excluded(2));
+    } 
+
+    #[test]
     fn test_rotate_number() {
         assert_eq!(1, rotate_number(1));
         assert_eq!(2, rotate_number(2));
