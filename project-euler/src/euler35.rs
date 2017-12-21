@@ -113,6 +113,10 @@ mod main {
     fn test_is_excluded() {
         assert_eq!(true, is_excluded(22));
         assert_eq!(false, is_excluded(2));
+        assert_eq!(true, is_excluded(4));
+        assert_eq!(true, is_excluded(44));
+        assert_eq!(true, is_excluded(5));
+        assert_eq!(true, is_excluded(55));
     } 
 
     #[test]
