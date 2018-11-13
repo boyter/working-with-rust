@@ -3,6 +3,7 @@ fn main() {
     greetings::hello();
     phrases::greetings::hello();
     phrases::greet();
+    phrases::greetings::prihello();
 }
 
 fn greet() -> String {
@@ -26,6 +27,10 @@ mod phrases {
         pub fn hello() {
             println!("Hello, world!");
         }
+
+        pub fn prihello() {
+            super::hello();
+        }
     }
 
     pub fn greet() {
@@ -33,7 +38,7 @@ mod phrases {
     }
 
     fn hello() {
-        println!("Hello world");
+        println!("Private Hello world");
     }
 
 }
