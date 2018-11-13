@@ -1,9 +1,14 @@
 extern crate learning;
+extern crate cratelearning;
 
 mod othergreetings;
 mod deepgreetings;
 
+use std::time::Instant;
+
 fn main() {
+    let started_at = Instant::now();
+
     greet();
     greetings::hello();
     phrases::greetings::hello();
@@ -15,6 +20,12 @@ fn main() {
     deepgreetings::greetings::hello();
     deepgreetings::hidden::hiddenhello();
     println!("{}", learning::cratehello());
+    cratelearning::hello();
+
+    let elapsed = Instant::now().duration_since(started_at);
+    println!("{elapsed}",
+         elapsed = elapsed.subsec_nanos()
+    );
 }
 
 fn greet() -> String {

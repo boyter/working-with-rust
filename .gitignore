@@ -7,3 +7,5 @@ borrowing/target/*
 .idea/
 learning/Cargo.lock
 learning/target/*
+learning/cratelearning/Cargo.lock
+learning/cratelearning/target/*
