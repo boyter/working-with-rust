@@ -11,6 +11,7 @@ fn main() {
     othergreetings::greetings::hello();
     deepgreetings::hello();
     deepgreetings::greetings::hello();
+    deepgreetings::hidden::hiddenhello();
 }
 
 fn greet() -> String {
