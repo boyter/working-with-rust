@@ -3,7 +3,7 @@ pub fn cratehello() -> String {
 }
 
 #[cfg(test)] // only compiles when runing tests
-    mod tests {
+mod tests {
     use super::cratehello; // import root hello function
 
     #[test]

@@ -1,8 +1,8 @@
-extern crate learning;
 extern crate cratelearning;
+extern crate learning;
 
-mod othergreetings;
 mod deepgreetings;
+mod othergreetings;
 
 use std::time::Instant;
 
@@ -23,9 +23,7 @@ fn main() {
     cratelearning::hello();
 
     let elapsed = Instant::now().duration_since(started_at);
-    println!("{elapsed}",
-         elapsed = elapsed.subsec_nanos()
-    );
+    println!("{elapsed}", elapsed = elapsed.subsec_nanos());
 }
 
 fn greet() -> String {
@@ -34,7 +32,8 @@ fn greet() -> String {
 
 mod greetings {
     // ⭐️ By default, everything inside a module is private
-    pub fn hello() { // ⭐️ So function has to be public to access from outside
+    pub fn hello() {
+        // ⭐️ So function has to be public to access from outside
         println!("Hello, world!");
     }
 }
