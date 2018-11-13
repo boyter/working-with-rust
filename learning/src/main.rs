@@ -1,18 +1,20 @@
+mod othergreetings;
+mod deepgreetings;
+
 fn main() {
     greet();
     greetings::hello();
     phrases::greetings::hello();
     phrases::greet();
     phrases::greetings::prihello();
+    othergreetings::hello();
+    othergreetings::greetings::hello();
+    deepgreetings::hello();
+    deepgreetings::greetings::hello();
 }
 
 fn greet() -> String {
     "Hello, world!".to_string()
-}
-
-#[test] // test attribute indicates, this is a test function
-fn test_greet() {
-    assert_eq!("Hello, world!", greet())
 }
 
 mod greetings {
@@ -41,4 +43,14 @@ mod phrases {
         println!("Private Hello world");
     }
 
+}
+
+#[cfg(test)] // only compiles when running tests
+mod tests {
+    use super::greet; // import root greet function
+
+    #[test]
+    fn test_greet() {
+        assert_eq!("Hello, world!", greet());
+    }
 }
