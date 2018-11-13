@@ -1,3 +1,5 @@
+extern crate learning;
+
 mod othergreetings;
 mod deepgreetings;
 
@@ -12,6 +14,7 @@ fn main() {
     deepgreetings::hello();
     deepgreetings::greetings::hello();
     deepgreetings::hidden::hiddenhello();
+    println!("{}", learning::cratehello());
 }
 
 fn greet() -> String {
