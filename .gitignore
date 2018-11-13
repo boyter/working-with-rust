@@ -4,4 +4,6 @@ vector-space/Cargo.lock
 vector-space/target/*
 borrowing/Cargo.lock
 borrowing/target/*
-
+.idea/
+learning/Cargo.lock
+learning/target/*
